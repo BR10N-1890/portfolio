@@ -1,0 +1,325 @@
+/* ======================
+   SIDEBAR LATERALE
+====================== */
+
+body {
+    display: flex;
+    min-height: 100vh;
+}
+
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 240px;
+    height: 100vh;
+    background: linear-gradient(180deg, #142438, #1a2d45);
+    padding: 1.8rem 1.2rem;
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid rgba(255,255,255,0.08);
+}
+
+.sidebar-header h2 {
+    font-size: 1.4rem;
+    line-height: 1.1;
+    margin-bottom: 0.3rem;
+    color: #f3f4f6;
+}
+
+.sidebar-header span {
+    color: var(--accent);
+    font-weight: 700;
+}
+
+.sidebar-header p {
+    font-size: 0.8rem;
+    color: var(--text-soft);
+    margin-bottom: 1.4rem;
+}
+
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    flex: 1 1 auto;              /* pousse le footer vers le bas */
+}
+
+/* Petit footer en bas de la sidebar */
+.sidebar-footer {
+    margin-top: auto;            /* se colle au bas de la sidebar */
+    padding-top: 1.2rem;
+    border-top: 1px solid rgba(148, 163, 184, 0.25);
+    font-size: 0.78rem;
+    color: var(--text-soft);
+}
+
+.sidebar-footer-title {
+    margin: 0 0 0.25rem;
+    font-weight: 500;
+    color: #e5e7eb;
+    font-size: 0.8rem;
+}
+
+.sidebar-footer-note {
+    margin: 0;
+    line-height: 1.4;
+}
+
+.sidebar-link {
+    text-decoration: none;
+    font-size: 0.95rem;
+    color: #9ca3af;
+    padding: 0.5rem 0.6rem;
+    border-radius: 0.5rem;
+    transition: 0.25s ease;
+}
+
+.sidebar-link:hover {
+    background: rgba(255,255,255,0.05);
+    color: #f3f4f6;
+}
+
+.sidebar-link.active {
+    background: rgba(255,255,255,0.08);
+    color: #f3f4f6;
+}
+
+.content-wrapper {
+    margin-left: 260px;
+    padding: 2rem;
+    flex: 1;
+
+    height: 100vh;      /* fixe la zone visible */
+    overflow: hidden;   /* empêche le scroll global */
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+  flex: 1;
+  min-height: 0; /* IMPORTANT pour que la section puisse scroller */
+}
+
+/* Masquer l'ancien header horizontal quand on utilise la sidebar */
+.site-header {
+    display: none;
+}
+
+html, body {
+    height: 100%;
+    overflow: hidden; /* empêche la barre de scroll "page" */
+}
+
+.content-wrapper {
+  margin-left: 260px;
+  padding: 2rem;
+
+  height: 100vh;
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.section-page.active-section {
+  flex: 1;
+  overflow-y: auto;
+
+  display: block;
+  padding-bottom: 4rem; /* permet d’atteindre le bas */
+}
+
+/* Le main prend l’espace dispo, le footer reste en bas */
+main {
+    flex: 1;
+}
+
+.site-footer {
+    margin-top: auto;   /* Sécurité en cas d’erreur de flex */
+}
+
+/* --- Optimisation affichage PC : sections sans scroll (≈1080p) --- */
+@media (min-width: 1025px) {
+
+     .section-page {
+        min-height: auto;          /* on annule le calc(100vh - 40px) */
+        padding-top: 3rem;         /* léger padding haut */
+        padding-bottom: 2.2rem;    /* léger padding bas */
+    }
+
+    /* On resserre un peu le header pour gagner quelques pixels */
+    .section-header {
+        margin-bottom: 2rem;
+    }
+}
+
+    /* Toutes les pages "section-page" un peu moins hautes */
+    .section-page {
+        padding-top: 3.2rem;
+        padding-bottom: 2.4rem;
+    }
+
+    /* Titre de section plus proche du contenu */
+    .section-header {
+        margin-bottom: 2.1rem;
+    }
+
+    /* ===========================
+       COMPÉTENCES TECHNIQUES
+       =========================== */
+
+    .skills-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1.25rem; /* un peu serré mais respirable */
+    }
+
+    .skill-card {
+        padding: 1.05rem 1.1rem;
+    }
+
+    .skill-card .card-title {
+        font-size: 0.96rem;
+        margin-bottom: 0.45rem;
+    }
+
+    .skill-card .card-text {
+        font-size: 0.9rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .skill-list {
+        margin: 0.3rem 0 0.6rem;
+    }
+
+    /* ===========================
+       COMPÉTENCES BTS
+       =========================== */
+
+    .bts-card {
+        height: 480px;           /* -40px par rapport à avant */
+    }
+
+    .bts-list {
+        margin-top: 0.6rem;
+    }
+
+    .bts-flip-hint {
+        font-size: 0.78rem;
+    }
+
+    /* ===========================
+       PROJETS
+       =========================== */
+
+    .projects-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 1.25rem;
+    }
+
+    .project-card {
+        padding: 1.25rem 1.2rem 1.15rem;
+    }
+
+    .project-meta {
+        margin-bottom: 0.5rem;
+    }
+
+    .project-tags {
+        margin-top: 0.35rem;
+        margin-bottom: 0.6rem;
+    }
+
+    /* ===========================
+       EXPÉRIENCES
+       =========================== */
+
+    .experience-content {
+        padding: 1.35rem 1.25rem 1.2rem;
+    }
+
+    .experience-item {
+        margin-bottom: 2rem;  /* timeline un peu plus compacte */
+    }
+
+    /* ===========================
+       VEILLE TECHNO + CONTACT
+       =========================== */
+
+    .veille-card,
+    .contact-info-card,
+    .contact-form-card {
+        padding: 1.4rem 1.25rem;
+    }
+
+    .contact-layout {
+        gap: 1.8rem;
+    }
+
+.section-page.active-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  animation: fadeInPage 0.35s ease-out;
+
+  flex: 1;
+  height: 100%;
+  min-height: 0;
+
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+/* =========================
+   BTS : tableau 3 colonnes x N lignes
+   ========================= */
+
+.bts-table-wrap {
+  margin-top: 1.8rem;
+  display: none;
+  text-align: center;
+}
+
+.bts-table-wrap.is-visible {
+  display: block;
+}
+
+.bts-table-title {
+  margin: 0 0 1rem;
+  font-size: 1rem;
+  color: #f9fafb;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.bts-table-grid {
+  max-width: 980px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+.bts-cell {
+  background: rgba(15, 23, 42, 0.92);
+  border: 1px solid rgba(148, 163, 184, 0.22);
+  border-radius: 14px;
+  padding: 0.9rem;
+  text-align: left;
+  min-height: 86px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 0.6rem;
+}
+
+.bts-cell .cell-title {
+  font-size: 0.85rem;
+  color: #e5e7eb;
+  line-height: 1.35;
+}
+
+.bts-cell .cell-action {
+  align-self: flex-start;
+}

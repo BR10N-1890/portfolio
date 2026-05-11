@@ -1,0 +1,850 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Portfolio - Alexandre La Rosa</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portfolio d'Alexandre La Rosa, étudiant en BTS SIO SISR, passionné par l'administration systèmes & réseaux et la cybersécurité.">
+    <!-- Police Google Fonts (optionnel, peut être modifié) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="mobile-header" aria-label="Navigation mobile">
+  <button class="mobile-burger" id="mobileBurger" aria-expanded="false" aria-controls="mobileMenu">☰</button>
+
+  <nav class="mobile-menu" id="mobileMenu" aria-hidden="true">
+    <a class="mobile-link" href="#accueil">Accueil</a>
+    <a class="mobile-link" href="#a-propos">À propos</a>
+    <a class="mobile-link" href="#competences-techniques">Compétences techniques</a>
+    <a class="mobile-link" href="#competences-bts">Compétences BTS</a>
+    <a class="mobile-link" href="#projets">Projets</a>
+    <a class="mobile-link" href="#experiences">Expériences</a>
+    <a class="mobile-link" href="#veille">Veille technologique</a>
+    <a class="mobile-link" href="#contact">Contact</a>
+    <a class="mobile-link" href="#mentions-legales">Mentions légales</a>
+  </nav>
+</header>
+
+<div class="mobile-footer" id="mobileFooter" aria-hidden="true">
+  <button class="mobile-footer-fab" id="mobileFooterToggle"
+          aria-expanded="false" aria-controls="mobileFooterPanel"
+          aria-label="Informations">
+    ⓘ
+  </button>
+
+  <div class="mobile-footer-panel" id="mobileFooterPanel">
+    <div class="mobile-footer-content">
+      <div><strong>© 2025 Alexandre La Rosa</strong></div>
+      <div style="opacity:.85; margin-top:.5rem;">
+        Portfolio BTS SIO SISR – Parcours, compétences, projets et veille technologique.
+      </div>
+      <div style="opacity:.7; margin-top:.5rem;">Moselle, France</div>
+    </div>
+  </div>
+</div>
+
+    <!-- Sidebar latérale -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <h2>Alexandre<br><span>La Rosa</span></h2>
+            <p>Étudiant BTS SIO SISR</p>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="#accueil" class="sidebar-link active">Accueil</a>
+            <a href="#a-propos" class="sidebar-link">À propos</a>
+            <a href="#competences-techniques" class="sidebar-link">Compétences techniques</a>
+            <a href="#competences-bts" class="sidebar-link">Compétences BTS</a>
+            <a href="#projets" class="sidebar-link">Projets</a>
+            <a href="#experiences" class="sidebar-link">Expériences</a>
+            <a href="#veille" class="sidebar-link">Veille technologique</a>
+            <a href="#contact" class="sidebar-link">Contact</a>
+            <a href="#mentions-legales" class="sidebar-link">Mentions légales</a>
+        </nav>
+                <footer class="sidebar-footer">
+            <p class="sidebar-footer-title">
+                © <span id="year"></span> Alexandre La Rosa
+            </p>
+            <p class="sidebar-footer-note">
+                Portfolio BTS SIO SISR – Parcours, compétences, projets et veille technologique.
+            </p>
+        </footer>
+    </aside>
+
+    <!-- Tout le reste du contenu est décalé à droite -->
+    <div class="content-wrapper">
+
+    <!-- En-tête avec navigation -->
+    <header class="site-header">
+        <div class="container nav-container">
+            <div class="logo">
+                <span class="logo-mark">AL</span>
+                <div class="logo-text">
+                    <span class="logo-name">Alexandre La Rosa</span>
+                    <span class="logo-subtitle">Étudiant BTS SIO SISR</span>
+                </div>
+            </div>
+
+            <!-- Bouton menu burger pour mobile -->
+            <button class="nav-toggle" aria-label="Ouvrir le menu de navigation">
+                <span class="nav-toggle-line"></span>
+                <span class="nav-toggle-line"></span>
+                <span class="nav-toggle-line"></span>
+            </button>
+
+            <!-- Navigation principale -->
+            <nav class="main-nav">
+                <ul class="nav-list">
+                    <!-- Liens d'ancrage vers les sections de la page -->
+                    <li><a href="#accueil" class="nav-link active">Accueil</a></li>
+                    <li><a href="#a-propos" class="nav-link">À propos</a></li>
+                    <li><a href="#competences-techniques" class="nav-link">Compétences techniques</a></li>
+                    <li><a href="#competences-bts" class="nav-link">Compétences BTS</a></li>
+                    <li><a href="#projets" class="nav-link">Projets</a></li>
+                    <li><a href="#experiences" class="nav-link">Expériences</a></li>
+                    <li><a href="#veille" class="nav-link">Veille technologique</a></li>
+                    <li><a href="#contact" class="nav-link">Contact</a></li>
+                    <li><a href="#mentions-legales" class="nav-link">Mentions légales</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Contenu principal -->
+    <main>
+        <!-- Section Hero / Accueil -->
+        <section id="accueil" class="section section-page hero-section">
+            <div class="container hero-content">
+                <div class="hero-text">
+                    <p class="hero-kicker">Étudiant en BTS SIO SISR</p>
+                    <h1 class="hero-title">Alexandre La Rosa</h1>
+                    <p class="hero-subtitle">
+                        J’ai 19 ans et je prépare un BTS Services Informatiques aux Organisations, option SISR 
+                        (Solutions d’Infrastructure, Systèmes et Réseaux). Passionné par l’informatique, les 
+                        nouvelles technologies et la cybersécurité, je souhaite évoluer vers des métiers liés 
+                        à la sécurité et à l’infrastructure.
+                    </p>
+                    <p class="hero-subtitle">
+                        Mon objectif à moyen terme est de poursuivre mes études pour devenir, par exemple, 
+                        <strong>administrateur systèmes & réseaux spécialisé en cybersécurité</strong> 
+                        (intitulé à affiner selon mes futures expériences).
+                    </p>
+
+                    <!-- Badges de présentation rapide -->
+                    <div class="hero-badges">
+                        <span class="badge badge-main">BTS SIO SISR</span>
+                        <span class="badge">Administration systèmes & réseaux</span>
+                        <span class="badge">Cybersécurité / Technologies</span>
+                    </div>
+
+                    <!-- Boutons d'action -->
+                    <div class="hero-actions">
+                        <a href="#contact" class="btn btn-primary">Me contacter</a>
+                        <a href="#projets" class="btn btn-ghost">Voir mes projets</a>
+                    </div>
+                </div>
+
+                <!-- Bloc "carte" profil -->
+                <aside class="hero-card">
+                    <p class="hero-location">
+                        <span class="dot"></span>
+                        Originaire du Nord de la France, actuellement en Moselle.
+                    </p>
+                    <dl class="hero-infos">
+                        <div class="hero-info-row">
+                            <dt>Nom</dt>
+                            <dd>Alexandre La Rosa</dd>
+                        </div>
+                        <div class="hero-info-row">
+                            <dt>Âge</dt>
+                            <dd>19 ans</dd>
+                        </div>
+                        <div class="hero-info-row">
+                            <dt>Formation</dt>
+                            <dd>BTS SIO – Option SISR</dd>
+                        </div>
+                        <div class="hero-info-row">
+                            <dt>Objectif</dt>
+                            <dd>Évoluer vers la sécurité et l’infrastructure</dd>
+                        </div>
+                    </dl>
+                    <p class="hero-note">
+                        Ce portfolio présente mon parcours, mes compétences, mes projets et ma veille 
+                        technologique dans le domaine des systèmes, réseaux et de la cybersécurité.
+                    </p>
+                </aside>
+            </div>
+        </section>
+
+        <!-- Section À propos -->
+        <section id="a-propos" class="section section-page">
+            <div class="container section-header">
+                <h2 class="section-title">À propos</h2>
+                <p class="section-subtitle">
+                    Un profil orienté infrastructure, systèmes, réseaux et sécurité, avec une vraie curiosité pour la technologie.
+                </p>
+            </div>
+            <div class="container about-layout">
+                <div class="about-text">
+                    <p>
+                        Je m’appelle <strong>Alexandre La Rosa</strong>, j’ai <strong>19 ans</strong> et je suis actuellement 
+                        étudiant en <strong>BTS SIO, option SISR</strong> (Solutions d’Infrastructure, Systèmes et Réseaux).
+                        Passionné par l’informatique et les nouvelles technologies depuis plusieurs années, 
+                        je me tourne naturellement vers les métiers de l’infrastructure et de la sécurité.
+                    </p>
+                    <p>
+                        Originaire du <strong>Nord de la France</strong>, je vis aujourd’hui en <strong>Moselle</strong>. 
+                        Ces différentes expériences géographiques m’ont permis de développer une bonne capacité 
+                        d’adaptation et une ouverture d’esprit utile aussi bien dans les projets techniques que dans 
+                        le travail en équipe.
+                    </p>
+                    <p>
+                        À travers mon BTS, mes projets et mes futurs stages, je souhaite renforcer mes compétences 
+                        en <strong>administration systèmes & réseaux</strong>, en <strong>virtualisation</strong> et en 
+                        <strong>cybersécurité</strong>. Mon projet professionnel est de poursuivre mes études 
+                        (licence professionnelle, bachelor, école spécialisée…) afin d’évoluer à terme vers un poste 
+                        comme <strong>administrateur systèmes et réseaux</strong> ou <strong>technicien sécurité 
+                        infrastructure</strong>.
+                    </p>
+                </div>
+
+                <div class="about-details-card">
+                    <h3 class="card-title">Informations personnelles</h3>
+                    <dl class="info-grid">
+                        <div class="info-item">
+                            <dt>Nom complet</dt>
+                            <dd>Alexandre La Rosa</dd>
+                        </div>
+                        <div class="info-item">
+                            <dt>Âge</dt>
+                            <dd>19 ans</dd>
+                        </div>
+                        <div class="info-item">
+                            <dt>Formation</dt>
+                            <dd>BTS SIO – Option SISR</dd>
+                        </div>
+                        <div class="info-item">
+                            <dt>Localisation</dt>
+                            <dd>Moselle, France</dd>
+                        </div>
+                        <div class="info-item">
+                            <dt>Origine</dt>
+                            <dd>Nord de la France</dd>
+                        </div>
+                        <div class="info-item">
+                            <dt>Centres d’intérêt</dt>
+                            <dd>Informatique, cybersécurité, homelab, nouvelles technologies</dd>
+                        </div>
+                    </dl>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Compétences techniques -->
+        <section id="competences-techniques" class="section section-page section-alt">
+            <div class="container section-header">
+                <h2 class="section-title">Compétences techniques</h2>
+                <p class="section-subtitle">
+                    Un socle de compétences SISR en administration systèmes, réseaux, virtualisation et cybersécurité.
+                </p>
+            </div>
+
+            <div class="container skills-grid">
+                <!-- Carte compétences systèmes -->
+                <article class="card skill-card">
+                    <h3 class="card-title">Administration systèmes</h3>
+                    <p class="card-text">
+                        Gestion et configuration de systèmes d’exploitation serveurs et postes clients.
+                    </p>
+                    <ul class="skill-list">
+                        <li>Installation et configuration de <strong>Windows Server</strong> (rôles, services, AD DS, etc.).</li>
+                        <li>Utilisation de <strong>Linux</strong> (ligne de commande, services réseaux de base).</li>
+                        <li>Gestion des utilisateurs, groupes et permissions.</li>
+                        <li>Mise en place de stratégies de base (sécurité, mises à jour).</li>
+                    </ul>
+                    <div class="skill-level">
+                        <span>Maîtrise actuelle</span>
+                        <div class="skill-bar">
+                            <div class="skill-bar-fill" style="width: 70%;"></div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Carte compétences réseaux -->
+                <article class="card skill-card">
+                    <h3 class="card-title">Réseaux</h3>
+                    <p class="card-text">
+                        Conception, mise en place et dépannage de réseaux locaux.
+                    </p>
+                    <ul class="skill-list">
+                        <li>Configuration de <strong>VLAN</strong> et de la segmentation réseau.</li>
+                        <li>Routage statique et notions de routage dynamique.</li>
+                        <li>Services <strong>DHCP</strong>, <strong>DNS</strong> et adressage IP (plan d’adressage).</li>
+                        <li>Utilisation de <strong>Packet Tracer</strong> et d’équipements Cisco (simulation / TP).</li>
+                    </ul>
+                    <div class="skill-level">
+                        <span>Maîtrise actuelle</span>
+                        <div class="skill-bar">
+                            <div class="skill-bar-fill" style="width: 65%;"></div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Carte compétences virtualisation -->
+                <article class="card skill-card">
+                    <h3 class="card-title">Virtualisation & homelab</h3>
+                    <p class="card-text">
+                        Mise en place d’environnements virtuels pour expérimenter et se former.
+                    </p>
+                    <ul class="skill-list">
+                        <li>Utilisation de <strong>VirtualBox</strong> pour les TP et maquettes.</li>
+                        <li>Découverte / utilisation de <strong>VMware</strong> ou <strong>Proxmox</strong> en homelab.</li>
+                        <li>Création de machines virtuelles pour tester des services (serveurs, routeurs virtuels, etc.).</li>
+                    </ul>
+                    <div class="skill-level">
+                        <span>Maîtrise actuelle</span>
+                        <div class="skill-bar">
+                            <div class="skill-bar-fill" style="width: 60%;"></div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Carte compétences cybersécurité -->
+                <article class="card skill-card">
+                    <h3 class="card-title">Notions de cybersécurité</h3>
+                    <p class="card-text">
+                        Sensibilisation aux risques, bonnes pratiques et sécurisation de base des systèmes et réseaux.
+                    </p>
+                    <ul class="skill-list">
+                        <li>Mise en place de <strong>sauvegardes</strong> (données, configurations).</li>
+                        <li>Segmentation du réseau pour limiter les risques.</li>
+                        <li>Gestion des mises à jour et correctifs de sécurité.</li>
+                        <li>Notions sur les menaces courantes (malwares, ransomware, phishing, etc.).</li>
+                    </ul>
+                    <div class="skill-level">
+                        <span>Maîtrise actuelle</span>
+                        <div class="skill-bar">
+                            <div class="skill-bar-fill" style="width: 55%;"></div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- Section Compétences BTS Blocs -->
+<section id="competences-bts" class="section section-page">
+    <div class="container section-header">
+        <h2 class="section-title">Compétences BTS – Bloc 1 / Bloc 2 / Bloc 3</h2>
+        <p class="section-subtitle">
+            Synthèse des compétences travaillées dans le cadre du BTS SIO SISR, organisées par blocs. 
+        </p>
+    </div>
+
+    <div class="container bts-grid">
+        <!-- Bloc 1 -->
+        <article class="card bts-card flip-card" data-bloc="1">
+            <div class="flip-inner">
+                <!-- Recto -->
+                <div class="flip-face flip-front">
+                    <h3 class="card-title">Bloc 1 : Support et mise à disposition de services informatiques</h3>
+                    <p class="card-text">
+                        Ce bloc couvre l’assistance aux utilisateurs, la mise en production de services et le suivi de leur bon fonctionnement.
+                    </p>
+                    <ul class="bts-list">
+                        <li>Installer et configurer des postes de travail.</li>
+                        <li>Assurer le support de premier niveau (diagnostic, résolution de pannes simples).</li>
+                        <li>Participer à la mise en place de services (applications métiers, services réseau de base).</li>
+                        <li>Documenter les interventions et rédiger des procédures.</li>
+                    </ul>
+                </div>
+
+                <!-- Verso -->
+                <div class="flip-face flip-back">
+                    <div class="flip-back-header">
+                        <h3 class="card-title">Bloc 1 – Procédures</h3>
+                        <p class="card-text">
+                            Sélection de procédures types liées au support utilisateur et à la mise à disposition de services.
+                        </p>
+                    </div>
+
+                    <div class="bts-procedures-list" data-src="procedures/etiquettes/procedures-bloc1.html"></div>
+
+                    <p class="bts-procedures-note">
+                        Les liens de téléchargement pointent pour l’instant vers <code>#</code>. 
+                        Ils seront à relier aux véritables fichiers PDF des procédures.
+                    </p>
+                </div>
+            </div>
+        </article>
+
+        <!-- Bloc 2 -->
+        <article class="card bts-card flip-card" data-bloc="2">
+            <div class="flip-inner">
+                <!-- Recto -->
+                <div class="flip-face flip-front">
+                    <h3 class="card-title">Bloc 2 : Administration des systèmes et des réseaux</h3>
+                    <p class="card-text">
+                        Ce bloc est au cœur de l’option SISR : il porte sur la conception, l’administration et la supervision des infrastructures.
+                    </p>
+                    <ul class="bts-list">
+                        <li>Configurer des serveurs (Windows / Linux) et services réseau.</li>
+                        <li>Mettre en place des VLAN, du routage et des services d’infrastructure (DHCP, DNS, etc.).</li>
+                        <li>Superviser l’état du réseau et des systèmes (outils de monitoring).</li>
+                        <li>Participer à la rédaction de la documentation technique.</li>
+                    </ul>
+                </div>
+
+                <!-- Verso -->
+                <div class="flip-face flip-back">
+                    <div class="flip-back-header">
+                        <h3 class="card-title">Bloc 2 – Procédures</h3>
+                        <p class="card-text">
+                            Procédures liées à la mise en place, l’administration et la supervision d’infrastructures systèmes et réseaux.
+                        </p>
+                    </div>
+
+                    <div class="bts-procedures-list" data-src="procedures/etiquettes/procedures-bloc2.html"></div>
+
+                    <p class="bts-procedures-note">
+                        Liens de téléchargement à connecter à vos véritables documents de procédures d’administration systèmes et réseaux.
+                    </p>
+                </div>
+            </div>
+        </article>
+
+        <!-- Bloc 3 -->
+        <article class="card bts-card flip-card" data-bloc="3">
+            <div class="flip-inner">
+                <!-- Recto -->
+                <div class="flip-face flip-front">
+                    <h3 class="card-title">Bloc 3 : Cybersécurité des services informatiques</h3>
+                    <p class="card-text">
+                        Ce bloc traite de la protection des systèmes et des réseaux, de la gestion des risques et de la mise en place de mesures de sécurité.
+                    </p>
+                    <ul class="bts-list">
+                        <li>Appliquer les bonnes pratiques de sécurité sur les postes et serveurs.</li>
+                        <li>Mettre en place des politiques de mots de passe et de gestion des accès.</li>
+                        <li>Participer à la sécurisation du réseau (segmentation, filtrage de base).</li>
+                        <li>Contribuer à la sensibilisation des utilisateurs aux risques (phishing, ransomwares…).</li>
+                    </ul>
+                </div>
+
+                <!-- Verso -->
+                <div class="flip-face flip-back">
+                    <div class="flip-back-header">
+                        <h3 class="card-title">Bloc 3 – Procédures</h3>
+                        <p class="card-text">
+                            Exemples de procédures liées à la sécurisation des systèmes, des réseaux et à la réponse aux incidents.
+                        </p>
+                    </div>
+
+                    <div class="bts-procedures-list" data-src="procedures/etiquettes/procedures-bloc3.html"></div>
+
+                    <p class="bts-procedures-note">
+                        Exemple de catalogue de procédures de cybersécurité. À adapter avec vos propres documents et retours de veille.
+                    </p>
+                </div>
+            </div>
+        </article>
+    </div>
+    <div class="container bts-table-wrap" id="btsTableWrap" aria-hidden="true">
+  <div class="bts-table-card">
+    <h3 class="bts-table-title" id="btsTableTitle">Procédures</h3>
+    <div class="bts-table-grid" id="btsTableGrid"></div>
+  </div>
+</div>
+</section>
+
+        <!-- Section Projets -->
+        <section id="projets" class="section section-page section-alt">
+            <div class="container section-header">
+                <h2 class="section-title">Projets</h2>
+                <p class="section-subtitle">
+                    Projets réalisés dans le cadre du BTS, en autonomie ou en entreprise, mettant en avant les aspects systèmes, réseaux et sécurité.
+                </p>
+            </div>
+
+            <div class="container projects-grid">
+                <!-- Projet BTS / SAÉ -->
+                <article class="card project-card">
+                    <div class="project-header">
+                        <span class="badge badge-bts">Projet BTS / SAÉ</span>
+                    </div>
+                    <h3 class="card-title">Mise en place d’une infrastructure réseau segmentée</h3>
+                    <p class="project-meta">
+                        <span>Contexte :</span> Projet de type SAÉ autour de la conception d’un réseau d’entreprise.
+                    </p>
+                    <p class="card-text">
+                        Conception d’un plan d’adressage, configuration de VLAN et de routage entre les différentes 
+                        zones (utilisateurs, serveurs, administration). Mise en place des services de base 
+                        (DHCP, DNS) et vérification de la connectivité.
+                    </p>
+                    <p class="card-text">
+                        <strong>Ce que j’ai appris :</strong> planification d’un réseau, configuration de commutateurs 
+                        et routeurs, importance de la segmentation pour la performance et la sécurité.
+                    </p>
+                    <div class="project-tags">
+                        <span class="tag">VLAN</span>
+                        <span class="tag">Routage</span>
+                        <span class="tag">DHCP / DNS</span>
+                        <span class="tag">Packet Tracer</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="#" class="btn btn-ghost btn-small">Documentation</a>
+                        <a href="#" class="btn btn-outline btn-small">GitHub</a>
+                    </div>
+                </article>
+
+                <!-- Projet personnel -->
+                <article class="card project-card">
+                    <div class="project-header">
+                        <span class="badge badge-personnel">Projet personnel</span>
+                    </div>
+                    <h3 class="card-title">Homelab virtualisé pour tests systèmes et réseaux</h3>
+                    <p class="project-meta">
+                        <span>Contexte :</span> Projet personnel de laboratoire virtuel à domicile.
+                    </p>
+                    <p class="card-text">
+                        Mise en place d’un petit homelab avec plusieurs machines virtuelles (serveurs Windows / Linux, 
+                        routeur virtuel, poste client) pour expérimenter l’installation de services, la configuration 
+                        de rôles et la mise en place d’environnements de test.
+                    </p>
+                    <p class="card-text">
+                        <strong>Ce que j’ai appris :</strong> gestion d’un environnement multi-VM, snapshots, 
+                        isolation des environnements de test, bonnes pratiques de base en sécurité.
+                    </p>
+                    <div class="project-tags">
+                        <span class="tag">VirtualBox / VMware</span>
+                        <span class="tag">Windows Server</span>
+                        <span class="tag">Linux</span>
+                        <span class="tag">Homelab</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="#" class="btn btn-ghost btn-small">Documentation</a>
+                        <a href="#" class="btn btn-outline btn-small">GitHub</a>
+                    </div>
+                </article>
+
+                <!-- Projet de stage -->
+                <article class="card project-card">
+                    <div class="project-header">
+                        <span class="badge badge-stage">Projet de stage / entreprise</span>
+                    </div>
+                    <h3 class="card-title">Participation au support et à l’administration d’un parc informatique</h3>
+                    <p class="project-meta">
+                        <span>Contexte :</span> Stage de BTS SIO SISR en entreprise (détails à compléter).
+                    </p>
+                    <p class="card-text">
+                        Participation au support aux utilisateurs, à l’installation et à la configuration de postes 
+                        et de périphériques, ainsi qu’au suivi de l’état du réseau et des serveurs selon les 
+                        procédures internes de l’entreprise.
+                    </p>
+                    <p class="card-text">
+                        <strong>Ce que j’ai appris :</strong> travail en conditions réelles, gestion des priorités, 
+                        importance de la communication avec les utilisateurs et de la documentation.
+                    </p>
+                    <div class="project-tags">
+                        <span class="tag">Support</span>
+                        <span class="tag">Parc informatique</span>
+                        <span class="tag">Procédures</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="#" class="btn btn-ghost btn-small">Documentation</a>
+                        <a href="#" class="btn btn-outline btn-small">GitHub</a>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- Section Expériences / Stages -->
+        <section id="experiences" class="section section-page">
+            <div class="container section-header">
+                <h2 class="section-title">Expériences / Stages</h2>
+                <p class="section-subtitle">
+                    Stages réalisés (ou à venir) dans le cadre du BTS SIO SISR, orientés support, systèmes et réseaux.
+                </p>
+            </div>
+
+            <div class="container experiences-timeline">
+                <!-- Stage 1ère année -->
+                <article class="experience-item">
+                    <div class="experience-marker"></div>
+                    <div class="experience-content card">
+                        <h3 class="card-title">Stage de 1ère année BTS SIO SISR</h3>
+                        <p class="experience-meta">
+                            <span class="exp-company">Entreprise à préciser</span> • 
+                            <span class="exp-location">Lieu à préciser</span> • 
+                            <span class="exp-dates">Dates à préciser</span>
+                        </p>
+                        <p class="card-text">
+                            Participation au support utilisateurs, à l’installation de postes et à la résolution 
+                            de pannes simples. Découverte du fonctionnement du SI de l’entreprise et des bonnes 
+                            pratiques internes.
+                        </p>
+                        <div class="experience-columns">
+                            <div>
+                                <h4>Missions principales</h4>
+                                <ul>
+                                    <li>Installation et configuration de postes de travail.</li>
+                                    <li>Support de premier niveau (incidents simples, demandes courantes).</li>
+                                    <li>Application des procédures internes de l’entreprise.</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4>Environnement technique</h4>
+                                <ul>
+                                    <li>Postes Windows, imprimantes, périphériques.</li>
+                                    <li>Serveurs Windows / Linux (lecture / observation).</li>
+                                    <li>Outils de ticketing ou de suivi (à préciser).</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Stage 2ème année -->
+                <article class="experience-item">
+                    <div class="experience-marker"></div>
+                    <div class="experience-content card">
+                        <h3 class="card-title">Stage de 2ème année BTS SIO SISR</h3>
+                        <p class="experience-meta">
+                            <span class="exp-company">Entreprise à préciser</span> • 
+                            <span class="exp-location">Lieu à préciser</span> • 
+                            <span class="exp-dates">Dates à préciser</span>
+                        </p>
+                        <p class="card-text">
+                            Stage plus orienté administration systèmes et réseaux, avec participation à la mise 
+                            en place ou à l’évolution de services d’infrastructure et à la sécurisation d’éléments du SI.
+                        </p>
+                        <div class="experience-columns">
+                            <div>
+                                <h4>Missions principales</h4>
+                                <ul>
+                                    <li>Participation à la configuration de serveurs ou services réseau.</li>
+                                    <li>Contribution à la documentation technique interne.</li>
+                                    <li>Prise en charge de tickets liés à l’infrastructure.</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4>Environnement technique</h4>
+                                <ul>
+                                    <li>Serveurs Windows / Linux, Active Directory.</li>
+                                    <li>Équipements réseau (switchs, routeurs, bornes Wi-Fi).</li>
+                                    <li>Outils de supervision ou de sauvegarde (à préciser).</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- Section Veille technologique -->
+        <section id="veille" class="section section-page section-alt">
+            <div class="container section-header">
+                <h2 class="section-title">Veille technologique</h2>
+                <p class="section-subtitle">
+                    Une veille orientée cybersécurité et sécurité des infrastructures pour rester informé des menaces et des bonnes pratiques.
+                </p>
+            </div>
+
+            <div class="container veille-layout">
+                <div class="card veille-card">
+                    <h3 class="card-title">Thématique de veille (exemple)</h3>
+                    <p class="card-text">
+                        Ma veille technologique est principalement orientée vers la <strong>cybersécurité</strong> et plus 
+                        particulièrement vers les menaces qui touchent les infrastructures : <strong>ransomwares</strong>, 
+                        <strong>cryptojacking</strong>, attaques sur les services exposés, failles sur les protocoles utilisés 
+                        dans les réseaux d’entreprise, etc.
+                    </p>
+                    <p class="card-text">
+                        L’objectif de cette veille est de comprendre comment les attaques fonctionnent, quels sont les 
+                        vecteurs d’intrusion les plus fréquents et quelles <strong>bonnes pratiques</strong> peuvent être mises 
+                        en place dès le niveau BTS pour limiter les risques (segmentation réseau, sauvegardes, mises à jour, 
+                        durcissement des systèmes, sensibilisation des utilisateurs).
+                    </p>
+                </div>
+
+                <div class="veille-side">
+                    <div class="card veille-card">
+                        <h3 class="card-title">Sources de veille</h3>
+                        <ul class="veille-list">
+                            <li>Sites spécialisés en cybersécurité (blogs, portails d’actualités).</li>
+                            <li>Bulletins d’alerte de type <strong>CERT-FR</strong> ou éditeurs de solutions de sécurité.</li>
+                            <li>Chaînes YouTube techniques sur la sécurité, l’administration systèmes et réseaux.</li>
+                            <li>Forums et communautés (Stack Overflow, Reddit, communautés francophones, etc.).</li>
+                            <li>Réseaux sociaux professionnels (LinkedIn) et newsletters spécialisées.</li>
+                        </ul>
+                    </div>
+
+                    <div class="card veille-card">
+                        <h3 class="card-title">Apports de la veille</h3>
+                        <ul class="veille-list">
+                            <li>Mieux comprendre les menaces actuelles et leurs impacts sur les SI.</li>
+                            <li>Identifier des idées de <strong>projets techniques</strong> (homelab, TP de sécurité, scripts).</li>
+                            <li>Mettre à jour mes connaissances en fonction des nouvelles vulnérabilités et correctifs.</li>
+                            <li>Adopter progressivement des réflexes de sécurité dans tous mes projets BTS.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Contact -->
+        <section id="contact" class="section section-page">
+            <div class="container section-header">
+                <h2 class="section-title">Contact</h2>
+                <p class="section-subtitle">
+                    Intéressé par mon profil pour un stage, une alternance ou une poursuite d’études ? N’hésitez pas à me contacter.
+                </p>
+            </div>
+
+            <div class="container contact-layout">
+               
+                <!-- Coordonnées -->
+                <div class="card contact-info-card">
+                    <h3 class="card-title">Coordonnées</h3>
+                    <ul class="contact-list">
+                        <li>
+                            <span class="contact-label">Nom :</span>
+                            <span class="contact-value">Alexandre La Rosa</span>
+                        </li>
+                        <li>
+                            <span class="contact-label">E-mail :</span>
+                            <span class="contact-value"><a href="mailto:prenom.nom@example.com">prenom.nom@example.com</a></span>
+                        </li>
+                        <li>
+                            <span class="contact-label">Localisation :</span>
+                            <span class="contact-value">Moselle, France (originaire du Nord)</span>
+                        </li>
+                    </ul>
+                    <div class="contact-links">
+    <a href="https://www.linkedin.com/in/alexandre-la-rosa-4a8455278/" target="_blank" class="btn btn-outline contact-link">
+        Profil LinkedIn
+    </a>
+    <a href="https://github.com/BR10N-1890" target="_blank" class="btn btn-outline contact-link">
+        Profil GitHub
+    </a>
+</div>
+                    <p class="contact-note">
+                        Liens à adapter avec mes profils réels une fois créés ou finalisés.
+                    </p>
+                </div>
+
+                <!-- Formulaire de contact (maquette) -->
+                <div class="card contact-form-card">
+                    <h3 class="card-title">Formulaire de contact (maquette)</h3>
+                    <form class="contact-form">
+                        <!-- Champ nom -->
+                        <div class="form-group">
+                            <label for="nom">Nom / Prénom</label>
+                            <input type="text" id="nom" name="nom" placeholder="Votre nom" required>
+                        </div>
+                        <!-- Champ e-mail -->
+                        <div class="form-group">
+                            <label for="email">Adresse e-mail</label>
+                            <input type="email" id="email" name="email" placeholder="votre.email@example.com" required>
+                        </div>
+                        <!-- Champ sujet -->
+                        <div class="form-group">
+                            <label for="sujet">Sujet</label>
+                            <input type="text" id="sujet" name="sujet" placeholder="Objet de votre message" required>
+                        </div>
+                        <!-- Champ message -->
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" rows="5" placeholder="Votre message..." required></textarea>
+                        </div>
+                        <!-- Bouton envoyer (maquette) -->
+                        <button type="submit" class="btn btn-primary">Envoyer (maquette)</button>
+                        <p class="form-note">
+                            Note : Ce formulaire est une <strong>maquette HTML</strong>. Pour un envoi réel, il faudra 
+                            ajouter un traitement côté serveur (par exemple en <strong>PHP</strong>) ou utiliser un 
+                            service tiers de gestion de formulaires.
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+    <!-- Section Mentions légales -->
+<section id="mentions-legales" class="section section-page">
+    <div class="container section-header">
+        <h2 class="section-title">Mentions légales</h2>
+        <p class="section-subtitle">
+            Informations légales relatives à ce portfolio étudiant. Ce contenu est fourni à titre indicatif 
+            et pourra être adapté en fonction de l’hébergement et des obligations légales applicables.
+        </p>
+    </div>
+
+    <div class="container">
+        <div class="card">
+            <h3 class="card-title">Éditeur du site</h3>
+            <p class="card-text">
+                Ce site est un <strong>portfolio personnel</strong> réalisé dans le cadre de mes études en 
+                <strong>BTS SIO, option SISR</strong>.
+            </p>
+            <p class="card-text">
+                <strong>Éditeur :</strong> Alexandre La Rosa<br>
+                <strong>Statut :</strong> Étudiant<br>
+                <strong>Adresse :</strong> (à compléter) – Moselle, France<br>
+                <strong>E-mail de contact :</strong> prenom.nom@example.com
+            </p>
+
+            <h3 class="card-title" style="margin-top:1.5rem;">Hébergement du site</h3>
+            <p class="card-text">
+                Le site est actuellement hébergé sur&nbsp;:
+            </p>
+            <p class="card-text">
+                <em>(Nom de l’hébergeur, adresse postale et coordonnées à compléter en fonction de l’hébergement réel.)</em>
+            </p>
+
+            <h3 class="card-title" style="margin-top:1.5rem;">Propriété intellectuelle</h3>
+            <p class="card-text">
+                L’ensemble des contenus présents sur ce site (textes, présentations, mises en page, 
+                éléments graphiques réalisés par moi-même, etc.) sont destinés à un usage personnel, 
+                pédagogique et professionnel (recrutement, jury d’examen, poursuite d’études).
+            </p>
+            <p class="card-text">
+                Toute réutilisation ou reproduction importante des contenus devra faire l’objet d’un accord 
+                préalable de l’éditeur du site.
+            </p>
+
+            <h3 class="card-title" style="margin-top:1.5rem;">Données personnelles</h3>
+            <p class="card-text">
+                Ce site ne collecte pas de données personnelles à l’insu des visiteurs. Les seules informations 
+                susceptibles d’être recueillies sont celles transmises volontairement via le formulaire de contact 
+                ou par e-mail.
+            </p>
+            <p class="card-text">
+                Ces informations sont utilisées uniquement afin de répondre aux demandes de contact et ne sont ni 
+                revendues ni transmises à des tiers, sauf obligation légale. Vous pouvez demander la modification 
+                ou la suppression des informations vous concernant en me contactant à l’adresse e-mail indiquée ci-dessus.
+            </p>
+
+            <h3 class="card-title" style="margin-top:1.5rem;">Cookies</h3>
+            <p class="card-text">
+                <strong>Aucun cookie n’est utilisé à des fins de suivi ou de mesure d’audience.</strong> 
+                Le site ne met pas en œuvre, à ce stade, de traceurs publicitaires ou analytiques.
+            </p>
+
+            <h3 class="card-title" style="margin-top:1.5rem;">Responsabilité</h3>
+            <p class="card-text">
+                Ce site a pour objectif de présenter mon profil, mon parcours et mes compétences en tant qu’étudiant. 
+                Malgré le soin apporté au contenu, des erreurs ou imprécisions peuvent subsister. Si vous constatez 
+                une information incorrecte ou un lien non fonctionnel, vous pouvez me le signaler par e-mail.
+            </p>
+        </div>
+    </div>
+</section>
+</main>
+
+    <!-- Script JS -->
+    <script src="script.js"></script>
+</body>
+</html>
