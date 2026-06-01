@@ -82,6 +82,14 @@ if (mobileFooter && mobileFooterToggle) {
 
     const navToggle = document.querySelector('.nav-toggle');
     const mainNav = document.querySelector('.main-nav');
+    const sidebar = document.querySelector('.sidebar');
+    const sidebarToggle = document.getElementById('sidebarToggle');
+    const procedureDetailCard = document.getElementById('procedureDetailCard');
+    const procedureDetailTitle = document.getElementById('procedureDetailTitle');
+    const procedureThumbnail = document.getElementById('procedureThumbnail');
+    const procedureThumbnailButton = document.getElementById('procedureThumbnailButton');
+    const procedureDetailContent = document.getElementById('procedureDetailContent');
+    const closeProcedureDetail = document.querySelector('.close-procedure-detail');
     const topNavLinks = document.querySelectorAll('.nav-link');
     const sidebarLinks = document.querySelectorAll('.sidebar-link');
     const sections = document.querySelectorAll('.section-page');
@@ -211,6 +219,327 @@ function closeBtsTable() {
         });
     }
 
+    if (sidebar && sidebarToggle) {
+        sidebarToggle.addEventListener('click', function (event) {
+            event.stopPropagation();
+            const collapsed = sidebar.classList.toggle('collapsed');
+            sidebarToggle.setAttribute('aria-expanded', String(!collapsed));
+            sidebarToggle.setAttribute('aria-label', collapsed ? 'Ouvrir la barre latérale' : 'Réduire la barre latérale');
+            sidebarToggle.textContent = collapsed ? '⇥' : '⇤';
+        });
+    }
+
+    const proceduresDetailMap = {
+        'Prise en charge d\'un ticket utilisateur avec ServiceNow': `
+            <h4>Contexte</h4>
+            <p class="card-text">Durant mon stage, les demandes utilisateurs étaient centralisées dans ServiceNow. Cet outil permettait de suivre les incidents, de qualifier les demandes et de documenter les actions réalisées par l’équipe Helpdesk.</p>
+            <h4>Objectif</h4>
+            <p class="card-text">Prendre en charge une demande utilisateur depuis sa réception jusqu’à sa résolution ou son escalade vers une équipe spécialisée.</p>
+            <h4>Outils utilisés</h4>
+            <p class="card-text">ServiceNow, Microsoft Teams, base de connaissances interne.</p>
+            <h4>Étapes principales</h4>
+            <p class="card-text">La première étape consiste à consulter la file des tickets dans ServiceNow. Le technicien identifie ensuite le ticket à traiter, lit la description de la demande et vérifie les informations disponibles : utilisateur concerné, poste utilisé, service impacté, niveau d’urgence et catégorie de l’incident.</p>
+            <p class="card-text">Si les informations sont insuffisantes, l’utilisateur est contacté afin d’obtenir des précisions. Un échange peut être réalisé via Microsoft Teams pour comprendre le problème, demander des captures ou accompagner l’utilisateur à distance.</p>
+            <p class="card-text">Une fois le diagnostic réalisé, le technicien applique une solution si le problème est connu. Si la demande dépasse son niveau d’intervention, le ticket est escaladé vers l’équipe compétente. Toutes les actions effectuées sont documentées dans ServiceNow afin de conserver une trace de l’intervention.</p>
+            <p class="card-text">Le ticket est ensuite clôturé uniquement après validation de la résolution ou après transmission correcte à une autre équipe.</p>
+            <h4>Résultat attendu</h4>
+            <p class="card-text">Le ticket est correctement qualifié, traité, documenté et clôturé. Si la résolution n’est pas possible au premier niveau, l’escalade contient suffisamment d’informations pour permettre la poursuite du traitement.</p>
+            <h4>Compétences E5 associées</h4>
+            <ul>
+                <li>Collecter, suivre et orienter des demandes.</li>
+                <li>Répondre aux incidents et aux demandes d’assistance.</li>
+                <li>Traiter des demandes concernant les services réseau, système ou applicatifs.</li>
+            </ul>
+        `,
+        'Assistance utilisateur à distance avec Microsoft Teams': `
+            <h4>Contexte</h4>
+            <p class="card-text">Dans un contexte Helpdesk, Microsoft Teams peut être utilisé pour communiquer avec les utilisateurs, effectuer un accompagnement à distance et guider la résolution d’un incident.</p>
+            <h4>Objectif</h4>
+            <p class="card-text">Assister un utilisateur à distance afin de diagnostiquer et résoudre un problème informatique sans intervention physique directe.</p>
+            <h4>Outils utilisés</h4>
+            <p class="card-text">Microsoft Teams, ServiceNow, poste utilisateur, documentation interne.</p>
+            <h4>Étapes principales</h4>
+            <p class="card-text">La demande est d’abord consultée dans ServiceNow afin d’identifier le problème signalé. L’utilisateur est ensuite contacté via Microsoft Teams pour confirmer les informations et obtenir davantage de détails sur les symptômes rencontrés.</p>
+            <p class="card-text">Selon la situation, un appel Teams ou un partage d’écran peut être proposé. L’utilisateur est guidé étape par étape afin de reproduire le problème ou de vérifier certains paramètres : connexion réseau, ouverture de session, accès à une application, message d’erreur ou comportement anormal.</p>
+            <p class="card-text">Le technicien applique ensuite les vérifications de base et propose une solution adaptée. Une fois la correction effectuée, l’utilisateur est invité à tester de nouveau le service ou l’application concernée.</p>
+            <p class="card-text">Enfin, le ticket ServiceNow est mis à jour avec les actions réalisées, le résultat obtenu et la confirmation de l’utilisateur.</p>
+            <h4>Résultat attendu</h4>
+            <p class="card-text">L’utilisateur est accompagné efficacement et le problème est résolu ou correctement orienté vers une autre équipe.</p>
+            <h4>Compétences E5 associées</h4>
+            <ul>
+                <li>Répondre aux incidents et demandes d’assistance.</li>
+                <li>Traiter des demandes applicatives.</li>
+                <li>Accompagner les utilisateurs dans la mise en place ou l’utilisation d’un service.</li>
+                <li>Collecter et suivre une demande.</li>
+            </ul>
+        `,
+        'Diagnostic d\'un incident avec Splunk': `
+            <h4>Contexte</h4>
+            <p class="card-text">Splunk est un outil permettant de rechercher et analyser des événements ou des logs. Il peut être utilisé pour aider au diagnostic d’un incident utilisateur, applicatif ou système.</p>
+            <h4>Objectif</h4>
+            <p class="card-text">Rechercher des informations techniques permettant de confirmer, préciser ou orienter l’origine d’un incident.</p>
+            <h4>Outils utilisés</h4>
+            <p class="card-text">Splunk, ServiceNow, Microsoft Teams.</p>
+            <h4>Étapes principales</h4>
+            <p class="card-text">Le diagnostic commence par la lecture du ticket dans ServiceNow. Les informations utiles sont relevées : nom de l’utilisateur, poste concerné, application utilisée, date et heure de l’incident, message d’erreur éventuel.</p>
+            <p class="card-text">À partir de ces éléments, une recherche est effectuée dans Splunk sur la période concernée. Les résultats sont filtrés afin d’identifier les événements liés à l’utilisateur, au poste ou à l’application.</p>
+            <p class="card-text">Les logs pertinents sont ensuite analysés pour repérer d’éventuelles erreurs, alertes, échecs d’authentification ou anomalies. Les éléments trouvés sont comparés avec les informations fournies par l’utilisateur.</p>
+            <p class="card-text">Les résultats utiles sont ajoutés au ticket ServiceNow. Si l’incident nécessite une expertise plus avancée, le ticket est transmis à l’équipe compétente avec les logs ou informations nécessaires.</p>
+            <h4>Résultat attendu</h4>
+            <p class="card-text">L’analyse Splunk permet d’orienter le diagnostic et d’apporter des éléments techniques fiables au traitement du ticket.</p>
+            <h4>Compétences E5 associées</h4>
+            <ul>
+                <li>Traiter des demandes concernant les services réseau, système ou applicatifs.</li>
+                <li>Vérifier les conditions de continuité d’un service informatique.</li>
+                <li>Répondre aux incidents et demandes d’assistance.</li>
+                <li>Orienter une demande vers le bon niveau de support.</li>
+            </ul>
+        `,
+        'Rédaction d’une procédure de support avec Atlassian': `
+            <h4>Contexte</h4>
+            <p class="card-text">Après la résolution d’un incident récurrent ou d’une demande technique, il est utile de rédiger une procédure afin de faciliter les futures interventions. En stage, les outils Atlassian peuvent être utilisés pour documenter les solutions et partager les connaissances avec l’équipe.</p>
+            <h4>Objectif</h4>
+            <p class="card-text">Créer une procédure claire, structurée et réutilisable par l’équipe support.</p>
+            <h4>Outils utilisés</h4>
+            <p class="card-text">Atlassian, ServiceNow, Microsoft Teams, documentation interne.</p>
+            <h4>Étapes principales</h4>
+            <p class="card-text">La rédaction commence par l’identification d’un besoin de documentation. Ce besoin peut provenir d’un incident récurrent, d’une solution nouvellement trouvée ou d’une demande régulièrement traitée par l’équipe Helpdesk.</p>
+            <p class="card-text">Les informations nécessaires sont ensuite rassemblées : contexte du problème, prérequis, étapes de résolution, points de vigilance et vérifications à effectuer après intervention.</p>
+            <p class="card-text">Une page est créée ou mise à jour dans l’espace Atlassian. La procédure est structurée avec un titre clair, une description du problème, les étapes de résolution et les éventuelles captures autorisées.</p>
+            <p class="card-text">Après rédaction, la procédure est relue afin de vérifier sa clarté et sa cohérence. Elle peut ensuite être partagée à l’équipe ou liée à un ticket ServiceNow afin de faciliter les interventions futures.</p>
+            <h4>Résultat attendu</h4>
+            <p class="card-text">La procédure est disponible pour l’équipe support et permet de traiter plus rapidement un problème similaire.</p>
+            <h4>Compétences E5 associées</h4>
+            <ul>
+                <li>Exploiter des référentiels, normes et standards.</li>
+                <li>Travailler en mode projet.</li>
+                <li>Répondre aux incidents et demandes d’assistance.</li>
+                <li>Organiser son développement professionnel.</li>
+            </ul>
+        `,
+        'Suivi d\'une demande ou d\'un mini-projet avec Atlassian': `
+            <h4>Contexte</h4>
+            <p class="card-text">Dans un environnement professionnel, les outils Atlassian permettent de suivre des tâches, de documenter l’avancement d’une demande et d’organiser le travail en équipe.</p>
+            <h4>Objectif</h4>
+            <p class="card-text">Suivre une demande ou une tâche technique depuis sa création jusqu’à sa finalisation.</p>
+            <h4>Outils utilisés</h4>
+            <p class="card-text">Atlassian, ServiceNow, Microsoft Teams.</p>
+            <h4>Étapes principales</h4>
+            <p class="card-text">La demande est d’abord identifiée à partir d’un besoin utilisateur, d’un ticket ServiceNow ou d’une action à réaliser en équipe. Une tâche est ensuite créée dans Atlassian avec un titre clair et une description précise.</p>
+            <p class="card-text">Les informations importantes sont ajoutées : objectif, priorité, personne ou équipe responsable, date limite, dépendances et état initial. La tâche est ensuite suivie au fur et à mesure de son avancement.</p>
+            <p class="card-text">Des commentaires sont ajoutés pour tracer les actions réalisées. Si nécessaire, des échanges sont effectués avec l’équipe via Microsoft Teams. Lorsque la demande est terminée, les résultats sont vérifiés, puis la tâche est clôturée avec un résumé de l’action réalisée.</p>
+            <h4>Résultat attendu</h4>
+            <p class="card-text">La demande est suivie de manière structurée et l’avancement est visible pour les membres de l’équipe.</p>
+            <h4>Compétences E5 associées</h4>
+            <ul>
+                <li>Analyser les objectifs et les modalités d’organisation d’un projet.</li>
+                <li>Planifier les activités.</li>
+                <li>Évaluer les indicateurs de suivi et analyser les écarts.</li>
+                <li>Travailler en mode projet.</li>
+            </ul>
+            
+        `,
+        'Vérification des habilitations d\'un utilisateur': `
+            <h4>Contexte</h4>
+            <p class="card-text">Dans une organisation, chaque utilisateur doit disposer uniquement des droits nécessaires à ses missions. La vérification des habilitations permet de limiter les risques liés aux accès excessifs ou inadaptés.</p>
+            <h4>Objectif</h4>
+            <p class="card-text">Contrôler ou mettre à jour les droits d’un utilisateur sur une ressource, une application ou un service.</p>
+            <h4>Outils utilisés</h4>
+            <p class="card-text">ServiceNow, Microsoft Teams, outil interne de gestion des accès, éventuellement Active Directory.</p>
+            <h4>Étapes principales</h4>
+            <p class="card-text">La demande d’accès est d’abord consultée dans ServiceNow. Le technicien identifie l’utilisateur concerné, le service demandé et la ressource ou application visée.</p>
+            <p class="card-text">Les droits actuels de l’utilisateur sont ensuite vérifiés. Ils sont comparés avec le besoin exprimé dans la demande. Si une validation hiérarchique ou métier est nécessaire, elle doit être obtenue avant toute modification.</p>
+            <p class="card-text">Lorsque la demande est autorisée, les droits sont ajoutés, modifiés ou supprimés selon le besoin. L’accès est ensuite testé avec l’utilisateur ou confirmé par celui-ci.</p>
+            <p class="card-text">Enfin, l’action réalisée est documentée dans le ticket ServiceNow. Le ticket est clôturé uniquement après validation du bon fonctionnement.</p>
+            <h4>Résultat attendu</h4>
+            <p class="card-text">L’utilisateur dispose des droits adaptés à son besoin, sans accès excessif ou non justifié.</p>
+            <h4>Compétences E5 associées</h4>
+            <ul>
+                <li>Mettre en place et vérifier les niveaux d’habilitation associés à un service.</li>
+                <li>Vérifier le respect des règles d’utilisation des ressources numériques.</li>
+                <li>Répondre aux incidents et demandes d’assistance.</li>
+            </ul>
+            
+        `,
+        'Installation et configuration de GLPI sur Debian 12': `
+            <h4>Contexte</h4>
+            <p class="card-text">Dans le cadre de l’infrastructure de formation, GLPI est utilisé pour gérer le parc informatique, suivre les équipements et centraliser les demandes d’assistance.</p>
+            <h4>Objectif</h4>
+            <p class="card-text">Installer GLPI sur un serveur Debian 12 afin de mettre à disposition un service de gestion de parc informatique.</p>
+            <h4>Outils utilisés</h4>
+            <p class="card-text">Debian 12, Apache2, MariaDB, PHP, GLPI, navigateur web.</p>
+            <h4>Étapes principales</h4>
+            <p class="card-text">La première étape consiste à préparer le serveur Debian 12 et à vérifier sa connectivité réseau. Le serveur est ensuite mis à jour, puis les services nécessaires sont installés : Apache2 pour le serveur web, MariaDB pour la base de données et PHP pour l’exécution de GLPI.</p>
+            <p class="card-text">Une base de données dédiée à GLPI est créée, ainsi qu’un utilisateur disposant des droits nécessaires. Les fichiers GLPI sont ensuite téléchargés, placés dans le répertoire web et configurés avec les permissions adaptées.</p>
+            <p class="card-text">La configuration Apache est créée ou modifiée afin de rendre GLPI accessible depuis un navigateur. Après redémarrage du service web, l’assistant d’installation de GLPI est lancé depuis l’interface web.</p>
+            <p class="card-text">Les informations de connexion à la base de données sont renseignées, puis l’installation est finalisée. L’accès à l’interface administrateur est ensuite testé.</p>
+            <h4>Résultat attendu</h4>
+            <p class="card-text">GLPI est accessible depuis le réseau et peut être utilisé pour gérer les équipements, les utilisateurs et les tickets.</p>
+            <h4>Compétences E5 associées</h4>
+            <ul>
+                <li>Mettre à disposition des utilisateurs un service informatique.</li>
+                <li>Déployer un service.</li>
+                <li>Réaliser les tests d’intégration et d’acceptation d’un service.</li>
+                <li>Gérer le patrimoine informatique.</li>
+            </ul>
+            
+        `,
+        'Déploiement de l’agent GLPI sur un poste Windows': `
+            <h4>Contexte</h4>
+            <p class="card-text">L’agent GLPI permet de remonter automatiquement les informations matérielles et logicielles d’un poste vers le serveur GLPI. Il facilite le recensement du parc informatique.</p>
+            <h4>Objectif</h4>
+            <p class="card-text">Installer et configurer l’agent GLPI sur un poste Windows afin de l’intégrer automatiquement à l’inventaire.</p>
+            <h4>Outils utilisés</h4>
+            <p class="card-text">GLPI, GLPI Agent, Windows, navigateur web.</p>
+            <h4>Étapes principales</h4>
+            <p class="card-text">Le serveur GLPI doit d’abord être accessible depuis le poste Windows. L’agent GLPI est ensuite téléchargé depuis une source officielle, puis lancé avec les droits administrateur.</p>
+            <p class="card-text">Pendant l’installation, l’adresse du serveur GLPI est renseignée afin que l’agent puisse envoyer les informations d’inventaire. Les options d’inventaire sont sélectionnées selon les besoins.</p>
+            <p class="card-text">Une fois l’installation terminée, un inventaire manuel peut être lancé pour vérifier le bon fonctionnement de l’agent. Le technicien se connecte ensuite à GLPI pour vérifier que le poste apparaît bien dans l’inventaire.</p>
+            <p class="card-text">Les informations remontées sont contrôlées : nom du poste, système d’exploitation, composants matériels, logiciels installés et adresse réseau.</p>
+            <h4>Résultat attendu</h4>
+            <p class="card-text">Le poste Windows est automatiquement ajouté à GLPI avec ses informations matérielles et logicielles.</p>
+            <h4>Compétences E5 associées</h4>
+            <ul>
+                <li>Recenser et identifier les ressources numériques.</li>
+                <li>Gérer le patrimoine informatique.</li>
+                <li>Déployer un service.</li>
+                <li>Vérifier le fonctionnement d’un service informatique.</li>
+            </ul>
+            
+        `,
+        'Diagnostic réseau avec Wireshark': `
+            <h4>Contexte</h4>
+            <p class="card-text">Wireshark est utilisé pour analyser le trafic réseau et diagnostiquer des problèmes de connectivité, de résolution DNS, d’attribution DHCP ou de communication entre machines.</p>
+            <h4>Objectif</h4>
+            <p class="card-text">Capturer et analyser des paquets réseau afin d’identifier l’origine d’un dysfonctionnement.</p>
+            <h4>Outils utilisés</h4>
+            <p class="card-text">Wireshark, poste Windows ou Debian, pfSense, services DNS/DHCP.</p>
+            <h4>Étapes principales</h4>
+            <p class="card-text">La première étape consiste à ouvrir Wireshark et à sélectionner l’interface réseau active. Une capture est ensuite lancée pendant que le problème est reproduit : test ping, résolution DNS, demande DHCP ou accès à un service.</p>
+            <p class="card-text">Une fois la capture terminée, des filtres sont appliqués pour faciliter l’analyse. Le filtre ICMP peut être utilisé pour un problème de ping, le filtre DNS pour une résolution de nom, le filtre DHCP ou BOOTP pour une attribution d’adresse IP, et le filtre ARP pour analyser les échanges d’adresses MAC.</p>
+            <p class="card-text">Les paquets sont ensuite examinés afin d’identifier une absence de réponse, un délai anormal, une erreur ou une mauvaise configuration. Les résultats sont notés, puis une correction est proposée : vérification de l’adresse IP, de la passerelle, du DNS, du firewall et de la connectivité réseau.</p>
+            <p class="card-text">Un nouveau test est réalisé après correction pour vérifier que le problème est résolu.</p>
+            <h4>Résultat attendu</h4>
+            <p class="card-text">L’analyse Wireshark permet d’identifier ou d’orienter la cause du problème réseau.</p>
+            <h4>Compétences E5 associées</h4>
+            <ul>
+                <li>Traiter des demandes concernant les services réseau et système.</li>
+                <li>Vérifier les conditions de continuité d’un service informatique.</li>
+                <li>Répondre aux incidents et demandes d’assistance.</li>
+            </ul>
+            
+        `,
+        'Test DNS et DHCP sur Windows Server': `
+            <h4>Contexte</h4>
+            <p class="card-text">Les services DNS et DHCP sont essentiels au fonctionnement d’un réseau d’entreprise. Le DHCP attribue automatiquement une configuration IP aux postes clients, tandis que le DNS permet de résoudre les noms en adresses IP.</p>
+            <h4>Objectif</h4>
+            <p class="card-text">Vérifier qu’un poste client reçoit une configuration IP correcte et peut résoudre les noms grâce au serveur DNS.</p>
+            <h4>Outils utilisés</h4>
+            <p class="card-text">Windows Server, console DHCP, console DNS, invite de commandes Windows, poste client.</p>
+            <h4>Étapes principales</h4>
+            <p class="card-text">La vérification commence sur le serveur Windows. La console DHCP est ouverte afin de contrôler que l’étendue est active, que la plage d’adresses est correcte et que les options DHCP sont bien renseignées, notamment la passerelle et le serveur DNS.</p>
+            <p class="card-text">La console DNS est ensuite vérifiée afin de contrôler la présence des zones nécessaires et des enregistrements utiles.</p>
+            <p class="card-text">Sur le poste client, la configuration IP est renouvelée à l’aide des commandes <code>ipconfig /release</code> puis <code>ipconfig /renew</code>. La commande <code>ipconfig /all</code> permet ensuite de vérifier l’adresse IP obtenue, la passerelle et le serveur DNS configuré.</p>
+            <p class="card-text">La résolution DNS est testée avec <code>nslookup</code>, puis la connectivité est vérifiée avec <code>ping</code>. En cas d’échec, les paramètres DHCP, DNS, firewall et connectivité réseau sont contrôlés.</p>
+            <h4>Résultat attendu</h4>
+            <p class="card-text">Le poste client reçoit une adresse IP valide et peut résoudre les noms via le serveur DNS.</p>
+            <h4>Compétences E5 associées</h4>
+            <ul>
+                <li>Traiter des demandes concernant les services réseau et système.</li>
+                <li>Vérifier les conditions de continuité d’un service informatique.</li>
+                <li>Réaliser les tests d’intégration et d’acceptation d’un service.</li>
+            </ul>
+            
+        `,
+        'Supervision d\'un serveur avec Zabbix Agent': `
+            <h4>Contexte</h4>
+            <p class="card-text">La supervision permet de contrôler l’état d’un serveur et d’anticiper les incidents. Zabbix Agent peut être installé sur un serveur afin de remonter des informations vers une console de supervision.</p>
+            <h4>Objectif</h4>
+            <p class="card-text">Installer et configurer Zabbix Agent pour suivre l’état d’un serveur.</p>
+            <h4>Outils utilisés</h4>
+            <p class="card-text">Zabbix Agent, serveur Zabbix, Debian ou Windows, interface web Zabbix.</p>
+            <h4>Étapes principales</h4>
+            <p class="card-text">L’agent Zabbix est installé sur le serveur à superviser. Une fois installé, son fichier de configuration est modifié afin de renseigner l’adresse du serveur Zabbix et le nom de l’hôte supervisé.</p>
+            <p class="card-text">Le service Zabbix Agent est ensuite redémarré, puis son état est vérifié pour s’assurer qu’il fonctionne correctement. Dans l’interface web Zabbix, un nouvel hôte est créé avec le même nom que celui défini dans la configuration de l’agent.</p>
+            <p class="card-text">Un modèle de supervision est associé à l’hôte afin de récupérer les informations utiles : disponibilité, charge système, mémoire, disque ou réseau.</p>
+            <p class="card-text">Après quelques instants, les dernières données reçues sont vérifiées dans Zabbix. Si aucune donnée ne remonte, la configuration réseau, le pare-feu ou le nom de l’hôte sont contrôlés.</p>
+            <h4>Résultat attendu</h4>
+            <p class="card-text">Le serveur est visible dans Zabbix et ses informations de supervision remontent correctement.</p>
+            <h4>Compétences E5 associées</h4>
+            <ul>
+                <li>Vérifier les conditions de continuité d’un service informatique.</li>
+                <li>Déployer un service.</li>
+                <li>Réaliser les tests d’intégration et d’acceptation d’un service.</li>
+                <li>Gérer le patrimoine informatique.</li>
+            </ul>
+            
+        `,
+        'Mise à jour du portfolio web et veille technologique': `
+            <h4>Contexte</h4>
+            <p class="card-text">Le portfolio web permet de présenter les réalisations professionnelles, les compétences et la veille technologique dans le cadre du BTS SIO. Il participe également à la construction de l’identité professionnelle.</p>
+            <h4>Objectif</h4>
+            <p class="card-text">Publier une nouvelle réalisation professionnelle ou une information de veille afin de valoriser son parcours et ses compétences.</p>
+            <h4>Outils utilisés</h4>
+            <p class="card-text">GitHub, GitHub Pages, éditeur de code, navigateur web, sources de veille.</p>
+            <h4>Étapes principales</h4>
+            <p class="card-text">Le contenu à ajouter est d’abord préparé : titre de la réalisation, contexte, objectif, outils utilisés, compétences associées et preuves à intégrer. Les captures sont sélectionnées et anonymisées si nécessaire.</p>
+            <p class="card-text">Les fichiers du portfolio sont ensuite modifiés dans l’éditeur de code. La nouvelle réalisation ou la nouvelle veille est ajoutée dans la page correspondante. Les liens internes et l’affichage sont vérifiés localement.</p>
+            <p class="card-text">Les modifications sont ensuite envoyées sur GitHub. Une fois la publication effectuée avec GitHub Pages, le site est ouvert dans un navigateur afin de vérifier que la page est accessible et correctement affichée.</p>
+            <p class="card-text">La veille technologique est mise à jour avec les sources consultées, les informations importantes et l’intérêt professionnel de chaque élément retenu.</p>
+            <h4>Résultat attendu</h4>
+            <p class="card-text">Le portfolio est mis à jour, accessible en ligne et présente clairement les réalisations professionnelles et la veille technologique.</p>
+            <h4>Compétences E5 associées</h4>
+            <ul>
+                <li>Développer la présence en ligne de l’organisation.</li>
+                <li>Participer à l’évolution d’un site web.</li>
+                <li>Référencer les services en ligne et mesurer leur visibilité.</li>
+                <li>Mettre en œuvre des outils et stratégies de veille informationnelle.</li>
+                <li>Gérer son identité professionnelle.</li>
+                <li>Développer son projet professionnel.</li>
+            </ul>
+            
+        `
+    };
+
+    function openProcedureDetail(card) {
+        if (!procedureDetailCard || !procedureDetailTitle || !procedureDetailContent || !card) return;
+        const selectedTitle = card.dataset.procedureTitle || card.querySelector('.card-title')?.textContent.trim() || 'Détail de la procédure';
+        procedureDetailTitle.textContent = selectedTitle;
+
+        if (procedureThumbnail && procedureThumbnailButton) {
+            const imageSrc = card.dataset.procedureImage;
+            if (imageSrc) {
+                procedureThumbnail.src = imageSrc;
+                procedureThumbnail.alt = selectedTitle;
+                procedureThumbnailButton.dataset.fullsrc = imageSrc;
+                procedureThumbnailButton.classList.remove('hidden');
+            } else {
+                procedureThumbnailButton.classList.add('hidden');
+            }
+        }
+
+        procedureDetailContent.innerHTML = proceduresDetailMap[selectedTitle] || '<p class="card-text">Description à compléter.</p>';
+        procedureDetailCard.classList.remove('hidden');
+        procedureDetailCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    const procedureButtons = document.querySelectorAll('.procedure-open');
+    procedureButtons.forEach(button => {
+        button.addEventListener('click', function (event) {
+            event.preventDefault();
+            const card = this.closest('.procedure-card');
+            openProcedureDetail(card);
+        });
+    });
+
+    if (closeProcedureDetail) {
+        closeProcedureDetail.addEventListener('click', function () {
+            if (procedureDetailCard) {
+                procedureDetailCard.classList.add('hidden');
+            }
+        });
+    }
+
     // ===============================
     // Navigation type SPA (sans scroll)
     // ===============================
@@ -273,15 +602,15 @@ function goToByDelta(delta) {
 }
 
 function elementCanScroll(el) {
-    return el && el.scrollHeight > el.clientHeight + 1;
+    return el && el.scrollHeight > el.clientHeight + 20;
 }
 
 function isAtTop(el) {
-    return !el || el.scrollTop <= 0;
+    return !el || el.scrollTop <= 2;
 }
 
 function isAtBottom(el) {
-    return !el || (el.scrollTop + el.clientHeight >= el.scrollHeight - 1);
+    return !el || (el.scrollTop + el.clientHeight >= el.scrollHeight - 4);
 }
 
 // Détermine quel élément scrolle réellement :
@@ -461,6 +790,47 @@ btsCards.forEach(card => {
     openedBtsCard = card;
   });
 });
+
+    const imageModal = document.getElementById('imageModal');
+    const imageModalImg = document.getElementById('imageModalImg');
+    const imageModalClose = document.getElementById('imageModalClose');
+    const imageModalBackdrop = document.getElementById('imageModalBackdrop');
+
+    function closeImageModal() {
+        if (!imageModal) return;
+        imageModal.classList.add('hidden');
+        imageModal.setAttribute('aria-hidden', 'true');
+        if (imageModalImg) {
+            imageModalImg.src = '';
+            imageModalImg.alt = '';
+        }
+    }
+
+    document.querySelectorAll('.placeholder-image-button').forEach(button => {
+        button.addEventListener('click', function () {
+            if (!imageModal || !imageModalImg) return;
+            const fullsrc = this.dataset.fullsrc;
+            const alt = this.querySelector('img')?.alt || '';
+            imageModalImg.src = fullsrc;
+            imageModalImg.alt = alt;
+            imageModal.classList.remove('hidden');
+            imageModal.setAttribute('aria-hidden', 'false');
+        });
+    });
+
+    if (imageModalClose) {
+        imageModalClose.addEventListener('click', closeImageModal);
+    }
+
+    if (imageModalBackdrop) {
+        imageModalBackdrop.addEventListener('click', closeImageModal);
+    }
+
+    document.addEventListener('keydown', function (event) {
+        if (event.key === 'Escape') {
+            closeImageModal();
+        }
+    });
 
 // Empêcher les clics internes (boutons / liste scrollable) de re-déclencher le clic carte
 document.addEventListener('click', (e) => {
