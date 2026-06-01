@@ -1,6 +1,11 @@
 /* ======================
-   SIDEBAR LATERALE
+   SIDEBAR LATÉRALE
 ====================== */
+
+html, body {
+    height: 100%;
+    overflow: hidden;
+}
 
 body {
     display: flex;
@@ -11,20 +16,77 @@ body {
     position: fixed;
     left: 0;
     top: 0;
-    width: 240px;
+    width: fit-content;
+    min-width: 220px;
+    max-width: 340px;
     height: 100vh;
     background: linear-gradient(180deg, #142438, #1a2d45);
-    padding: 1.8rem 1.2rem;
+    padding: clamp(1rem, 2vh, 1.8rem) clamp(0.8rem, 1vw, 1.2rem);
     display: flex;
     flex-direction: column;
     border-right: 1px solid rgba(255,255,255,0.08);
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.sidebar.collapsed {
+    width: 72px;
+    min-width: 72px;
+    max-width: 72px;
+    padding-left: 0.8rem;
+    padding-right: 0.8rem;
+}
+
+.sidebar.collapsed + .content-wrapper {
+    margin-left: 72px;
 }
 
 .sidebar-header h2 {
-    font-size: 1.4rem;
+    font-size: clamp(1rem, 1.4vw, 1.4rem);
     line-height: 1.1;
-    margin-bottom: 0.3rem;
+    margin-bottom: 0.25rem;
     color: #f3f4f6;
+}
+
+.sidebar-toggle {
+    margin-top: 0.35rem;
+    margin-bottom: 0.75rem;
+    border: none;
+    background: rgba(255,255,255,0.08);
+    color: #f3f4f6;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.2s ease;
+    align-self: flex-start;
+}
+
+.sidebar-toggle:hover {
+    background: rgba(255,255,255,0.16);
+    transform: translateX(2px);
+}
+
+.sidebar.collapsed .sidebar-toggle {
+    transform: rotate(180deg);
+}
+
+.sidebar.collapsed .sidebar-header h2 {
+    font-size: 0;
+    line-height: 0;
+}
+
+.sidebar.collapsed .sidebar-header h2::before {
+    content: "AL";
+    display: block;
+    font-size: 1.1rem;
+    line-height: 1.2;
+    color: #f3f4f6;
+}
+
+.sidebar.collapsed .sidebar-header p,
+.sidebar.collapsed .sidebar-footer {
+    display: none;
 }
 
 .sidebar-header span {
@@ -33,46 +95,57 @@ body {
 }
 
 .sidebar-header p {
-    font-size: 0.8rem;
+    font-size: clamp(0.7rem, 0.85vw, 0.85rem);
     color: var(--text-soft);
-    margin-bottom: 1.4rem;
+    margin-bottom: clamp(0.6rem, 1.5vh, 1.4rem);
 }
 
 .sidebar-nav {
     display: flex;
     flex-direction: column;
-    gap: 0.6rem;
-    flex: 1 1 auto;              /* pousse le footer vers le bas */
+    gap: clamp(0.2rem, 0.6vh, 0.6rem);
+    flex: 1 1 auto;
 }
 
-/* Petit footer en bas de la sidebar */
 .sidebar-footer {
-    margin-top: auto;            /* se colle au bas de la sidebar */
-    padding-top: 1.2rem;
+    margin-top: auto;
+    padding-top: clamp(0.6rem, 1.2vh, 1.2rem);
     border-top: 1px solid rgba(148, 163, 184, 0.25);
-    font-size: 0.78rem;
+    font-size: clamp(0.68rem, 0.78vw, 0.78rem);
     color: var(--text-soft);
 }
 
 .sidebar-footer-title {
-    margin: 0 0 0.25rem;
+    margin: 0 0 0.2rem;
     font-weight: 500;
     color: #e5e7eb;
-    font-size: 0.8rem;
+    font-size: clamp(0.7rem, 0.8vw, 0.8rem);
 }
 
 .sidebar-footer-note {
     margin: 0;
-    line-height: 1.4;
+    line-height: 1.35;
 }
 
 .sidebar-link {
     text-decoration: none;
-    font-size: 0.95rem;
+    font-size: clamp(0.8rem, 0.92vw, 0.95rem);
     color: #9ca3af;
-    padding: 0.5rem 0.6rem;
+    padding: clamp(0.4rem, 0.6vh, 0.6rem) 0.6rem;
     border-radius: 0.5rem;
     transition: 0.25s ease;
+    white-space: normal;
+    overflow: visible;
+    text-overflow: clip;
+}
+
+.sidebar.collapsed .sidebar-link {
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding-left: 0;
+    padding-right: 0;
 }
 
 .sidebar-link:hover {
@@ -85,241 +158,564 @@ body {
     color: #f3f4f6;
 }
 
-.content-wrapper {
-    margin-left: 260px;
-    padding: 2rem;
-    flex: 1;
+/* ======================
+   ZONE DE CONTENU
+====================== */
 
-    height: 100vh;      /* fixe la zone visible */
-    overflow: hidden;   /* empêche le scroll global */
+.content-wrapper {
+    margin-left: 340px;
+    padding: clamp(0.8rem, 2vh, 2rem) clamp(1rem, 2vw, 2rem);
+    flex: 1;
+    height: 100vh;
+    overflow: hidden;
     display: flex;
     flex-direction: column;
 }
 
 main {
-  flex: 1;
-  min-height: 0; /* IMPORTANT pour que la section puisse scroller */
+    flex: 1;
+    min-height: 0;
 }
 
-/* Masquer l'ancien header horizontal quand on utilise la sidebar */
+/* Masquer l'ancien header horizontal */
 .site-header {
     display: none;
 }
 
-html, body {
-    height: 100%;
-    overflow: hidden; /* empêche la barre de scroll "page" */
-}
+/* ======================
+   SECTIONS (SPA)
+====================== */
 
-.content-wrapper {
-  margin-left: 260px;
-  padding: 2rem;
-
-  height: 100vh;
-  overflow: hidden;
-
-  display: flex;
-  flex-direction: column;
+.section-page {
+    display: none;
+    /* Plus de min-height fixe : on laisse la hauteur s'adapter */
+    padding-top: clamp(1.2rem, 3vh, 3.2rem);
+    padding-bottom: clamp(1rem, 2.5vh, 2.4rem);
 }
 
 .section-page.active-section {
-  flex: 1;
-  overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    animation: fadeInPage 0.3s ease-out;
 
-  display: block;
-  padding-bottom: 4rem; /* permet d’atteindre le bas */
-}
-
-/* Le main prend l’espace dispo, le footer reste en bas */
-main {
     flex: 1;
+    height: 100%;
+    min-height: 0;
+
+    overflow-y: auto;
+    overscroll-behavior: contain;
 }
 
-.site-footer {
-    margin-top: auto;   /* Sécurité en cas d’erreur de flex */
+/* Scrollbar discrète dans les sections */
+.section-page.active-section::-webkit-scrollbar {
+    width: 6px;
+}
+.section-page.active-section::-webkit-scrollbar-track {
+    background: transparent;
+}
+.section-page.active-section::-webkit-scrollbar-thumb {
+    background: rgba(148, 163, 184, 0.3);
+    border-radius: 999px;
 }
 
-/* --- Optimisation affichage PC : sections sans scroll (≈1080p) --- */
-@media (min-width: 1025px) {
-
-     .section-page {
-        min-height: auto;          /* on annule le calc(100vh - 40px) */
-        padding-top: 3rem;         /* léger padding haut */
-        padding-bottom: 2.2rem;    /* léger padding bas */
-    }
-
-    /* On resserre un peu le header pour gagner quelques pixels */
-    .section-header {
-        margin-bottom: 2rem;
-    }
+.section-header {
+    margin-bottom: clamp(1rem, 2.5vh, 2.5rem);
 }
 
-    /* Toutes les pages "section-page" un peu moins hautes */
-    .section-page {
-        padding-top: 3.2rem;
-        padding-bottom: 2.4rem;
-    }
-
-    /* Titre de section plus proche du contenu */
-    .section-header {
-        margin-bottom: 2.1rem;
-    }
-
-    /* ===========================
-       COMPÉTENCES TECHNIQUES
-       =========================== */
-
-    .skills-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 1.25rem; /* un peu serré mais respirable */
-    }
-
-    .skill-card {
-        padding: 1.05rem 1.1rem;
-    }
-
-    .skill-card .card-title {
-        font-size: 0.96rem;
-        margin-bottom: 0.45rem;
-    }
-
-    .skill-card .card-text {
-        font-size: 0.9rem;
-        margin-bottom: 0.5rem;
-    }
-
-    .skill-list {
-        margin: 0.3rem 0 0.6rem;
-    }
-
-    /* ===========================
-       COMPÉTENCES BTS
-       =========================== */
-
-    .bts-card {
-        height: 480px;           /* -40px par rapport à avant */
-    }
-
-    .bts-list {
-        margin-top: 0.6rem;
-    }
-
-    .bts-flip-hint {
-        font-size: 0.78rem;
-    }
-
-    /* ===========================
-       PROJETS
-       =========================== */
-
-    .projects-grid {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 1.25rem;
-    }
-
-    .project-card {
-        padding: 1.25rem 1.2rem 1.15rem;
-    }
-
-    .project-meta {
-        margin-bottom: 0.5rem;
-    }
-
-    .project-tags {
-        margin-top: 0.35rem;
-        margin-bottom: 0.6rem;
-    }
-
-    /* ===========================
-       EXPÉRIENCES
-       =========================== */
-
-    .experience-content {
-        padding: 1.35rem 1.25rem 1.2rem;
-    }
-
-    .experience-item {
-        margin-bottom: 2rem;  /* timeline un peu plus compacte */
-    }
-
-    /* ===========================
-       VEILLE TECHNO + CONTACT
-       =========================== */
-
-    .veille-card,
-    .contact-info-card,
-    .contact-form-card {
-        padding: 1.4rem 1.25rem;
-    }
-
-    .contact-layout {
-        gap: 1.8rem;
-    }
-
-.section-page.active-section {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  animation: fadeInPage 0.35s ease-out;
-
-  flex: 1;
-  height: 100%;
-  min-height: 0;
-
-  overflow-y: auto;
-  overscroll-behavior: contain;
+.section-title {
+    font-size: clamp(1.3rem, 2.2vw, 2rem);
+    margin: 0 0 0.5rem;
 }
 
-/* =========================
-   BTS : tableau 3 colonnes x N lignes
-   ========================= */
+.section-subtitle {
+    font-size: clamp(0.82rem, 0.95vw, 0.95rem);
+}
 
+/* ======================
+   HERO
+====================== */
+
+.hero-section {
+    /* Remplir la hauteur visible plutôt qu'une valeur fixe */
+    min-height: auto;
+    padding-top: clamp(1rem, 4vh, 4rem);
+    padding-bottom: clamp(1rem, 3vh, 3rem);
+    align-items: center;
+}
+
+.hero-content {
+    gap: clamp(1.2rem, 2.5vw, 2.5rem);
+}
+
+.hero-title {
+    font-size: clamp(1.6rem, 2.8vw, 2.8rem);
+    margin-bottom: 0.5rem;
+}
+
+.hero-subtitle {
+    font-size: clamp(0.84rem, 0.97vw, 0.97rem);
+    margin-bottom: 0.5rem;
+}
+
+.hero-badges {
+    margin: 0.8rem 0 1rem;
+}
+
+.hero-card {
+    padding: clamp(1rem, 1.5vh, 1.5rem) clamp(0.9rem, 1.5vw, 1.5rem);
+}
+
+.hero-infos {
+    margin-bottom: 0.8rem;
+}
+
+.hero-info-row {
+    font-size: clamp(0.8rem, 0.9vw, 0.9rem);
+    padding: 0.2rem 0;
+}
+
+.hero-location {
+    margin-bottom: 0.8rem;
+}
+
+.hero-note {
+    font-size: clamp(0.72rem, 0.8vw, 0.8rem);
+}
+
+/* ======================
+   À PROPOS
+====================== */
+
+.about-layout {
+    gap: clamp(1.2rem, 2.5vw, 2.5rem);
+}
+
+.about-text p {
+    font-size: clamp(0.84rem, 0.97vw, 0.97rem);
+    margin-bottom: 0.7rem;
+}
+
+.about-details-card {
+    padding: clamp(1rem, 1.75vh, 1.75rem) clamp(0.9rem, 1.5vw, 1.5rem);
+}
+
+.info-item dt {
+    font-size: clamp(0.68rem, 0.75vw, 0.75rem);
+    margin-bottom: 0.15rem;
+}
+
+.info-item dd {
+    font-size: clamp(0.82rem, 0.95vw, 0.95rem);
+}
+
+/* ======================
+   COMPÉTENCES TECHNIQUES
+====================== */
+
+.skills-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(0.8rem, 1.5vh, 1.5rem);
+    align-items: stretch;
+}
+
+.skill-card {
+    padding: clamp(0.9rem, 1.2vh, 1.2rem) clamp(0.9rem, 1.1vw, 1.1rem);
+}
+
+.skill-card .card-title {
+    font-size: clamp(0.88rem, 0.96vw, 0.96rem);
+    margin-bottom: 0.35rem;
+}
+
+.skill-card .card-text {
+    font-size: clamp(0.82rem, 0.9vw, 0.9rem);
+    margin-bottom: 0.4rem;
+}
+
+.skill-list {
+    margin: 0.2rem 0 0.5rem;
+    font-size: clamp(0.8rem, 0.88vw, 0.9rem);
+}
+
+.skill-list li {
+    margin-bottom: 0.2rem;
+}
+
+/* ======================
+   COMPÉTENCES BTS
+====================== */
+
+.bts-grid {
+    gap: clamp(0.8rem, 1.5vh, 1.5rem);
+}
+
+.bts-card {
+    /* Hauteur auto : grandit avec le contenu du recto */
+    height: auto;
+}
+
+.flip-face {
+    padding: clamp(1rem, 1.6vh, 1.6rem) clamp(1rem, 1.6vw, 1.6rem) clamp(1.2rem, 2vh, 2rem);
+}
+
+.bts-list {
+    margin-top: 0.4rem;
+    margin-bottom: 0.6rem;
+    font-size: clamp(0.8rem, 0.9vw, 0.9rem);
+}
+
+.bts-list li {
+    margin-bottom: 0.25rem;
+}
+
+.bts-flip-hint {
+    font-size: clamp(0.72rem, 0.78vw, 0.78rem);
+}
+
+.bts-procedures-list {
+    max-height: clamp(180px, 25vh, 280px);
+}
+
+/* Tableau BTS */
 .bts-table-wrap {
-  margin-top: 1.8rem;
-  display: none;
-  text-align: center;
+    margin-top: clamp(1rem, 1.8vh, 1.8rem);
+    display: none;
+    text-align: center;
 }
 
 .bts-table-wrap.is-visible {
-  display: block;
+    display: block;
 }
 
 .bts-table-title {
-  margin: 0 0 1rem;
-  font-size: 1rem;
-  color: #f9fafb;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+    margin: 0 0 0.8rem;
+    font-size: clamp(0.85rem, 1vw, 1rem);
+    color: #f9fafb;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
 }
 
 .bts-table-grid {
-  max-width: 980px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 0.75rem;
+    max-width: 980px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(0.4rem, 0.75vh, 0.75rem);
 }
 
 .bts-cell {
-  background: rgba(15, 23, 42, 0.92);
-  border: 1px solid rgba(148, 163, 184, 0.22);
-  border-radius: 14px;
-  padding: 0.9rem;
-  text-align: left;
-  min-height: 86px;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 0.6rem;
+    background: rgba(15, 23, 42, 0.92);
+    border: 1px solid rgba(148, 163, 184, 0.22);
+    border-radius: 14px;
+    padding: clamp(0.6rem, 0.9vh, 0.9rem);
+    text-align: left;
+    min-height: 70px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 0.5rem;
 }
 
 .bts-cell .cell-title {
-  font-size: 0.85rem;
-  color: #e5e7eb;
-  line-height: 1.35;
+    font-size: clamp(0.75rem, 0.85vw, 0.85rem);
+    color: #e5e7eb;
+    line-height: 1.3;
 }
 
 .bts-cell .cell-action {
-  align-self: flex-start;
+    align-self: flex-start;
+}
+
+/* ======================
+   PROJETS
+====================== */
+
+.projects-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(0.8rem, 1.5vh, 1.5rem);
+}
+
+.infra-grid,
+.password-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: clamp(0.8rem, 1.5vh, 1.5rem);
+}
+
+/* Center password cards when there are fewer items */
+.password-grid {
+    justify-content: center;
+    grid-template-columns: repeat(2, minmax(220px, 360px));
+}
+
+.placeholder-box {
+    min-height: 180px;
+    border: 2px dashed rgba(148, 163, 184, 0.45);
+    border-radius: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+    background: rgba(255, 255, 255, 0.03);
+    text-align: center;
+    padding: 1rem;
+}
+
+.placeholder-image-button {
+    display: block;
+    width: 100%;
+    padding: 0;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    text-align: left;
+}
+
+.placeholder-image-button:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 4px;
+}
+
+.placeholder-image-button.hidden {
+    display: none;
+}
+
+.placeholder-image {
+    width: 100%;
+    display: block;
+    border-radius: 1rem;
+    object-fit: cover;
+    max-height: 280px;
+}
+
+.image-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 1100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+}
+
+.image-modal.hidden {
+    display: none;
+}
+
+.image-modal-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.86);
+}
+
+.image-modal-content {
+    position: relative;
+    max-width: 100%;
+    max-height: 100%;
+    z-index: 1;
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55);
+    background: rgba(15, 23, 42, 0.96);
+}
+
+.image-modal img {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: calc(100vh - 4rem);
+}
+
+.image-modal-close {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    z-index: 2;
+    border: none;
+    background: rgba(15, 23, 42, 0.9);
+    color: #fff;
+    font-size: 1.3rem;
+    line-height: 1;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.password-placeholder .card-text {
+    min-height: 3rem;
+}
+
+.project-card {
+    padding: clamp(1rem, 1.4vh, 1.4rem) clamp(0.9rem, 1.2vw, 1.2rem);
+}
+
+.project-meta {
+    font-size: clamp(0.76rem, 0.83vw, 0.83rem);
+    margin-bottom: 0.4rem;
+}
+
+.project-tags {
+    margin-top: 0.3rem;
+    margin-bottom: 0.5rem;
+}
+
+.card-text {
+    font-size: clamp(0.82rem, 0.95vw, 0.95rem);
+}
+
+/* ======================
+   EXPÉRIENCES
+====================== */
+
+.experience-content {
+    padding: clamp(1rem, 1.4vh, 1.4rem) clamp(0.9rem, 1.25vw, 1.25rem);
+}
+
+.experience-item {
+    margin-bottom: clamp(1.2rem, 2.2vh, 2.2rem);
+}
+
+.experience-columns h4 {
+    font-size: clamp(0.82rem, 0.9vw, 0.9rem);
+}
+
+.experience-columns ul {
+    font-size: clamp(0.78rem, 0.88vw, 0.88rem);
+}
+
+/* ======================
+   VEILLE + CONTACT
+====================== */
+
+.veille-card,
+.contact-info-card,
+.contact-form-card {
+    padding: clamp(1rem, 1.5vh, 1.5rem) clamp(0.9rem, 1.25vw, 1.25rem);
+}
+
+.contact-layout {
+    gap: clamp(1rem, 1.8vw, 1.8rem);
+}
+
+.veille-layout {
+    gap: clamp(1rem, 2vw, 2rem);
+}
+
+.veille-list,
+.contact-list {
+    font-size: clamp(0.82rem, 0.9vw, 0.9rem);
+}
+
+.contact-form input,
+.contact-form textarea {
+    font-size: clamp(0.82rem, 0.9vw, 0.9rem);
+    padding: 0.5rem 0.65rem;
+}
+
+.contact-form textarea {
+    min-height: clamp(80px, 12vh, 130px);
+}
+
+/* ======================
+   CARTES GÉNÉRIQUES
+====================== */
+
+.card {
+    padding: clamp(1rem, 1.75vh, 1.75rem) clamp(0.9rem, 1.5vw, 1.5rem);
+}
+
+.procedure-detail-card {
+    width: 100%;
+    margin-top: 2rem;
+    border: 1px solid rgba(148, 163, 184, 0.16);
+    background: rgba(21, 37, 63, 0.96);
+    overflow: hidden;
+}
+
+.procedure-detail-card.hidden {
+    display: none;
+}
+
+.procedure-detail-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+}
+
+.procedure-detail-content {
+    max-height: 64vh;
+    overflow-y: auto;
+    padding-right: 0.25rem;
+}
+
+.procedure-detail-content p,
+.procedure-detail-content ul,
+.procedure-detail-content ol,
+.procedure-detail-content h4 {
+    margin: 0 0 1rem;
+}
+
+.procedure-detail-content h4 {
+    font-size: 1rem;
+    color: #f3f4f6;
+}
+
+.procedure-detail-content ul,
+.procedure-detail-content ol {
+    padding-left: 1.2rem;
+}
+
+.procedure-open {
+    min-width: 90px;
+}
+
+.procedure-detail-card .card-title {
+    margin-bottom: 0.5rem;
+}
+
+.card-title {
+    font-size: clamp(0.92rem, 1.1vw, 1.1rem);
+    margin-bottom: 0.5rem;
+}
+
+/* ======================
+   MENTIONS LÉGALES
+====================== */
+
+#mentions-legales .card {
+    max-width: 860px;
+    margin: 0 auto;
+}
+
+#mentions-legales .card-title {
+    margin-top: 1.2rem;
+}
+
+/* ======================
+   MOBILE : masquer sidebar
+====================== */
+
+.mobile-header, .mobile-footer { display: none; }
+
+@media (max-width: 900px) {
+    .sidebar { display: none !important; }
+    .content-wrapper {
+        margin-left: 0 !important;
+        padding: 1rem;
+    }
+    .mobile-header, .mobile-footer { display: block; }
+    main { padding-bottom: 56px; padding-top: 56px; }
+}
+
+/* Centrage des cartes dans la section Projets */
+#projets .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(300px, 345px));
+    justify-content: center;
+    gap: 1.5rem;
 }
